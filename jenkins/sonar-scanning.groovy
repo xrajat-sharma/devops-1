@@ -9,7 +9,7 @@ podTemplate(label: label, containers: [
     def gitBranch = repo.GIT_BRANCH
     def shortGitCommit = "${gitCommit[0..10]}"
     def previousGitCommit = sh(script: "git rev-parse ${gitCommit}~", returnStdout: true)
-	  
+ 
     stage('Code Scanning') {
 	withCredentials([
                   usernamePassword(credentialsId: 'SONARQUBE_AUTHENTICATION',
@@ -17,10 +17,16 @@ podTemplate(label: label, containers: [
                   passwordVariable: 'SONARQUBE_TOKEN')
                 ]) {
 	      container('sonarqube') {
-		sh "echo $SONARQUBE_HOST"
-		sh "printenv"
+		sh " sonar-scanner 
+		      -Dsonar.qualitygate.wait=true \
+		      -Dsonar.projectKey=devops/devlop \
+		      -Dsonar.sources=. \
+		      -Dsonar.projectVersion=$BUILD_ID \
+		      -Dsonar.host.url=$SONARQUBE_HOST \
+		      -Dsonar.login=$SONARQUBE_TOKEN
+		   "
 	      }
 	  }
+       }
     }
-  }
 }
