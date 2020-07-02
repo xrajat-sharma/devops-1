@@ -11,9 +11,15 @@ podTemplate(label: label, containers: [
     def previousGitCommit = sh(script: "git rev-parse ${gitCommit}~", returnStdout: true)
  
     stage('Code Scanning') {
-      container('sonarqube') {
-        sh "sonar-scanner --version"
-      }
+	withCredentials([
+                  usernamePassword(credentialsId: 'SONARQUBE_AUTHENTICATION',
+                  usernameVariable: 'SONARQUBE_HOST',
+                  passwordVariable: 'SONARQUBE_TOKEN')
+                ]) {
+	      container('sonarqube') {
+		sh "echo SONAR_HOST"
+	      }
+	  }
     }
   }
 }
