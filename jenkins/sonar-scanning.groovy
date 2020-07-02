@@ -17,7 +17,7 @@ podTemplate(label: label, containers: [
                   passwordVariable: 'SONARQUBE_TOKEN')
                 ]) {
 	      container('sonarqube') {
-		sh " sonar-scanner 
+		sh " sonar-scanner \
 		      -Dsonar.qualitygate.wait=true \
 		      -Dsonar.projectKey=devops/devlop \
 		      -Dsonar.sources=. \
@@ -27,6 +27,6 @@ podTemplate(label: label, containers: [
 		   "
 	      }
 	  }
-       }
     }
+  }
 }
