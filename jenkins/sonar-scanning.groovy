@@ -23,8 +23,7 @@ podTemplate(label: label, containers: [
 		      -Dsonar.sources=. \
 		      -Dsonar.projectVersion=$BUILD_ID \
 		      -Dsonar.host.url=$SONARQUBE_HOST \
-		      -Dsonar.login=$SONARQUBE_TOKEN
-		   "
+		      -Dsonar.login=$SONARQUBE_TOKEN "
 	      }
 	  }
     }
