@@ -18,6 +18,7 @@ podTemplate(label: label, containers: [
                 ]) {
 	      container('sonarqube') {
 		sh "echo $SONARQUBE_HOST"
+		sh "printenv"
 	      }
 	  }
     }
