@@ -10,10 +10,6 @@ podTemplate(label: label, containers: [
     def shortGitCommit = "${gitCommit[0..10]}"
     def previousGitCommit = sh(script: "git rev-parse ${gitCommit}~", returnStdout: true)
 	  
-    for(e in env){
-	echo e + " is " + ${e}
-    }
-	  
     stage('Code Scanning') {
 	withCredentials([
                   usernamePassword(credentialsId: 'SONARQUBE_AUTHENTICATION',
