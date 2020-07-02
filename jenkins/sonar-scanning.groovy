@@ -12,15 +12,8 @@ podTemplate(label: label, containers: [
  
     stage('Code Scanning') {
       container('sonarqube') {
-        sh "sonar-scanner --help"
+        sh "sonar-scanner --version"
       }
     }
-
-    stage('Run kubectl') {
-      container('kubectl') {
-        sh "kubectl get pods"
-      }
-    }
-
   }
 }
