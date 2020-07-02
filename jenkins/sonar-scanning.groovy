@@ -12,7 +12,7 @@ podTemplate(label: label, containers: [
  
     stage('Code Scanning') {
       container('sonarqube') {
-        sh "sonar-scanner --version"
+        sh "sonar-scanner --help"
       }
     }
 
