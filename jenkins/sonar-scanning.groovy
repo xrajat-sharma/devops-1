@@ -17,7 +17,7 @@ podTemplate(label: label, containers: [
                   passwordVariable: 'SONARQUBE_TOKEN')
                 ]) {
 	      container('sonarqube') {
-		sh "echo $SONAR_HOST"
+		sh "echo $SONARQUBE_HOST"
 	      }
 	  }
     }
