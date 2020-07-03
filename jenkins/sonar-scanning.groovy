@@ -19,7 +19,7 @@ podTemplate(label: label, containers: [
 	      container('sonarqube') {
 		sh " sonar-scanner \
 		      -Dsonar.qualitygate.wait=true \
-		      -Dsonar.projectKey=devops/$gitBranch \
+		      -Dsonar.projectKey=sample-project/$gitBranch \
 		      -Dsonar.sources=. \
 		      -Dsonar.projectVersion=$BUILD_ID \
 		      -Dsonar.host.url=$SONARQUBE_HOST \
