@@ -13,7 +13,7 @@ kind: Pod
 spec:
   containers:
   - name: kaniko
-    image: gcr.io/kaniko-project/executor:debug-539ddefcae3fd6b411a95982a830d987f4214251
+    image: gcr.io/kaniko-project/executor@sha256:f652f28537fa76e8f4f9393de13a064f0206003c451ce2ad6e4359fd5a21acbc
     imagePullPolicy: Always
     command:
     - /busybox/cat
@@ -42,7 +42,7 @@ spec:
     def previousGitCommit = sh(script: "git rev-parse ${gitCommit}~", returnStdout: true)
     stage('Build with Kaniko') {
       container('kaniko') {
-        sh 'cat /kaniko/.docker/config.json '
+           sh '/kaniko/executor -f ./dockerfile/Dockerfile -c `pwd` --insecure --skip-tls-verify --cache=true --destination=646315653071.dkr.ecr.ap-south-1.amazonaws.com/santabanta/usermanagement:latest'
       }
     }
   }
