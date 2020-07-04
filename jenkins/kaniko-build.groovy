@@ -34,10 +34,15 @@ spec:
   ) {
 
   node(POD_LABEL) {
+    def repo = checkout scm
+    def gitCommit = repo.GIT_COMMIT
+    def gitBranch = repo.GIT_BRANCH
+    def shortGitCommit = "${gitCommit[0..10]}"
+    
+    def previousGitCommit = sh(script: "git rev-parse ${gitCommit}~", returnStdout: true)
     stage('Build with Kaniko') {
-      git 'https://github.com/jenkinsci/docker-jnlp-slave.git'
       container('kaniko') {
-        sh '/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure --skip-tls-verify --cache=true --destination=mydockerregistry:5000/myorg/myimage'
+        sh '/kaniko/executor -f `pwd`/dockerfile/Dockerfile -c `pwd` --insecure --skip-tls-verify --cache=true --destination=646315653071.dkr.ecr.ap-south-1.amazonaws.com/santabanta/usermanagement:latest'
       }
     }
   }
