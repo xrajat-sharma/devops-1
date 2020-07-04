@@ -42,6 +42,7 @@ spec:
     def previousGitCommit = sh(script: "git rev-parse ${gitCommit}~", returnStdout: true)
     stage('Build with Kaniko') {
       container('kaniko') {
+        sh "echo "{\"auths\":{\"$CA_REGISTRY\":{\"username\":\"$CA_REGISTRY_USER\",\"password\":\"$CA_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json"
         sh '/kaniko/executor -f ./dockerfile/Dockerfile -c `pwd` --insecure --skip-tls-verify --cache=true --destination=646315653071.dkr.ecr.ap-south-1.amazonaws.com/santabanta/usermanagement:latest'
       }
     }
