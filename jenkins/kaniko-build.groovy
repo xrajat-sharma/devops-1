@@ -42,7 +42,7 @@ spec:
     def previousGitCommit = sh(script: "git rev-parse ${gitCommit}~", returnStdout: true)
     stage('Build with Kaniko') {
       container('kaniko') {
-        sh '/kaniko/executor -f `pwd`/dockerfile/Dockerfile -c `pwd` --insecure --skip-tls-verify --cache=true --destination=646315653071.dkr.ecr.ap-south-1.amazonaws.com/santabanta/usermanagement:latest'
+        sh 'ls -R'
       }
     }
   }
